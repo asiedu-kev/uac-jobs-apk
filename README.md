@@ -1,7 +1,7 @@
 # uac-jobs-apk
-Application de partage de bourses et d'opportunités professionnelles pour le compte du concours lancée par la MaterCard Foundation au profit de l'UAC
+Application de partage de bourses et d'opportunités professionnelles pour le compte du concours lancée par la MasterCard Foundation au profit de l'UAC
 
-Pour concevoir cette application, nous avons utilisé la tecnologie react-native.
+Pour concevoir cette application, nous avons utilisé la technologie react-native.
 Ainsi pour démarrer le projet après l'avoir cloné,il faut d'abord installer react-native.
 
 Ensuite lancer un yarn install car notre gestionnaire de paquet est yarn,utiliser npm créerait des conflits.
