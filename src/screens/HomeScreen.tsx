@@ -21,10 +21,11 @@ import ActionButton from "../components/ui/ActionButton";
 import { useFocusEffect } from "@react-navigation/native";
 import axios from "axios";
 import { getArtticles, getOpportunities } from "../helpers/ApiCall.js";
+import Share from "react-native-share";
 
 const Home = () => {
   const [text, setText] = useState(null);
-  const url = "192.168.1.111:8000/api/opportunities/";
+
   const navigation = useNavigation();
   navigation.setOptions({
     headerTitle: "Welcome",
@@ -37,8 +38,20 @@ const Home = () => {
       />
     ),
   });
+  const shareOptions = {
+    title: "Share via",
+    message: "some message",
+    url: "some share url",
+    social: Share.Social.WHATSAPP,
+    whatsAppNumber: "9199999999", // country code + phone number
+    filename: "test", // only for base64 file in Android
+  };
   const getData = () => {
     getArtticles().then((data) => console.log(data));
+  };
+
+  const fun = async () => {
+    const shareResponse = await Share.open(shareOptions);
   };
 
   const mytextvar =
@@ -53,18 +66,18 @@ const Home = () => {
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <Header />
         <Divider style={{ borderTopWidth: 0.1999 }} />
-        <SearchBar
-          value={text}
-          onChange={setText}
-          onSubmit={() => null}
-          onClear={() => setText(null)}
-          placeholder={"Rechercher un article"}
-        />
-        <Divider style={{ borderTopWidth: 0.1999 }} />
         <ScrollView
           style={{ flex: 1, paddingHorizontal: 1 }}
           showsVerticalScrollIndicator={false}
         >
+          <SearchBar
+            value={text}
+            onChange={setText}
+            onSubmit={() => null}
+            onClear={() => setText(null)}
+            placeholder={"Rechercher un article"}
+          />
+          <Divider style={{ borderTopWidth: 0.1999 }} />
           {/*<DefaultTextBold style={{marginVertical: '50%'}}>Aucune actualité disponible</DefaultTextBold> */}
           {[1, 2, 3, 5, 8, 8, 5, 5, 5, 8, 9, 9, 10, 15, 28, 18].map((item) => (
             <Card style={{ padding: 15, marginVertical: 12 }}>
@@ -82,13 +95,13 @@ const Home = () => {
               <View style={{ flex: 1, flexDirection: "row" }}>
                 <ActionButton
                   label={"LIRE PLUS"}
-                  onPress={getData}
+                  onPress={() => navigation.navigate("ActualityDetail")}
                   color={Colors.dark}
                   style={{ marginTop: 14, width: "45%" }}
                 />
                 <ActionButton
                   label={"PARTAGER"}
-                  onPress={() => null}
+                  onPress={fun}
                   color={Colors.green}
                   style={{ marginTop: 14, width: "45%", marginLeft: 20 }}
                 />

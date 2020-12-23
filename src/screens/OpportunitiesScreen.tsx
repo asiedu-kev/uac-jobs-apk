@@ -46,23 +46,6 @@ const OpportunitiesScreen = () => {
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <Header />
         <Divider style={{ borderTopWidth: 0.1999 }} />
-        <View style={{ flexDirection: "column", alignItems: "center" }}>
-          {filter ? (
-            <Picker mode={"dropdown"} style={{ width: 100 }}>
-              <Picker.Item label={"Tous"} />
-              <Picker.Item label={"Opportunités"} />
-              <Picker.Item label={"Jobs"} />
-            </Picker>
-          ) : (
-            <SearchBar
-              value={text}
-              onChange={setText}
-              onSubmit={() => null}
-              onClear={() => setText(null)}
-              placeholder={"Rechercher une opportunité"}
-            />
-          )}
-        </View>
 
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -73,6 +56,23 @@ const OpportunitiesScreen = () => {
             style={{ flex: 1, paddingHorizontal: 1 }}
             showsVerticalScrollIndicator={false}
           >
+            <View style={{ flexDirection: "column", alignItems: "center" }}>
+              {filter ? (
+                <Picker mode={"dropdown"} style={{ width: 100 }}>
+                  <Picker.Item label={"Tous"} />
+                  <Picker.Item label={"Opportunités"} />
+                  <Picker.Item label={"Jobs"} />
+                </Picker>
+              ) : (
+                <SearchBar
+                  value={text}
+                  onChange={setText}
+                  onSubmit={() => null}
+                  onClear={() => setText(null)}
+                  placeholder={"Rechercher une opportunité"}
+                />
+              )}
+            </View>
             {/*<DefaultTextBold style={{marginVertical: '50%'}}>Aucune actualité disponible</DefaultTextBold> */}
             {[1, 2, 3, 5, 8, 8, 5, 5, 5, 8, 9, 9, 10, 15, 28, 18].map(
               (item) => (
@@ -116,7 +116,7 @@ const OpportunitiesScreen = () => {
       </View>
       <FAB
         style={styles.fab}
-        icon={!filter ? "filter" : "magnifying glass"}
+        icon={filter === false ? "filter" : "close"}
         onPress={() => setFilter(!filter)}
       />
     </SafeAreaView>
